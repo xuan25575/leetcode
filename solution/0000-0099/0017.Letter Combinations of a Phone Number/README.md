@@ -39,7 +39,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+   public List<String> letterCombinations(String digits) {
+       if(digits=="" || digits.length() ==0) return new ArrayList<>();
+        Map<Character,String> map = new HashMap<>();
+        map.put('2',"abc");
+        map.put('3',"def");
+        map.put('4',"ghi");
+        map.put('5',"jkl");
+        map.put('6',"mno");
+        map.put('7',"pqrs");
+        map.put('8',"tuv");
+        map.put('9',"wxyz");
+        List<String> ans = new ArrayList<>();
+        recur(new StringBuilder(),0,map,ans,digits);
+        return ans;
+    }
 
+    private void recur(StringBuilder path,int i,Map<Character,String> map,List<String> ans,String digits){
+        if(i == digits.length()){
+            ans.add(path.toString());
+            return;
+        }
+        String temp = map.get(digits.charAt(i));
+        for(char c : temp.toCharArray()){
+            path.append(c);
+            recur(path,i+1,map,ans,digits);
+            path.deleteCharAt(path.length()-1);
+        }
+    }
+}
 ```
 
 ### **...**
